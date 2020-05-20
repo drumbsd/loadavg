@@ -1,4 +1,6 @@
-# loadavg
+:imagesdir: images
+
+# Loadavg
 Simple loadavg agent/server that produce a static HTML page on daily timeframe. 
 
 [qanda]
@@ -16,3 +18,32 @@ Where it works?::
 How it works?::
   Agent component send to redis server the normalized loadaverage calculated on 5 minutes timeframe.
   Parser component, that needs to be executed manually or by cron, fetch data from redis and produce a file called loadavg.html
+
+# Examples
+.Follow these steps:
+.  Clone the repository
+.  Enter this command to build both agent and parser component
+[source,bash]
+# go build loadavg_get.go
+# go build loadavg_put.go
+. Copy the loadavg_put binary on servers that you want to monitor
+. Execute the binary: 
+[source,bash]
+# nohup loadavg_put -redis=foo.bar.com &
+. Run parser component to get data from redis and produce HTML.
+[source,bash]
+# ./loadavg_get -redis=foo.bar.com 
+. Open loadavg.html file with your browser
+
+.How to read data
+A -1 with green background::
+    Means that no data has been retrieved for that server in that particular timeframe
+A >= 1 with red background::
+    Means that normalized loadaverage is >=1, so all your core are currently busy.
+A 0 with white background:: 
+    Means that load average is between 0 and 1, so it's all ok.
+    
+# ScreenShot
+.Sample
+image::example.png[]
+    
