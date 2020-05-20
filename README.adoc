@@ -8,6 +8,11 @@ What is LoadAvg?::
 What is needed to build?::
   * go-lang
   * git
+  * A redis server reachable from both agent and parser component.
   
 Where it works?::
   Has been tested on Linux,OpenBSD and FreeBSD. 
+
+How it works?::
+  Agent component send to redis server the normalized loadaverage calculated on 5 minutes timeframe.
+  Parser component, that needs to be executed manually or by cron, fetch data from redis and produce a file called loadavg.html
