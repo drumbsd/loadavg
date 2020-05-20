@@ -1,2 +1,13 @@
 # loadavg
 Simple loadavg agent/server that produce a static HTML page on daily timeframe. 
+
+[qanda]
+What is LoadAvg?::
+  Is a simple go program with agent and a html generator to produce a static HTML file of a normalized load average server group
+
+What is needed to build?::
+  * go-lang
+  * git
+  
+Where it works?::
+  Has been tested on Linux,OpenBSD and FreeBSD. 
