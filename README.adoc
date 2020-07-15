@@ -29,7 +29,7 @@ How it works?::
 . Copy the loadavg_put binary on servers that you want to monitor
 . Execute the binary: 
 [source,bash]
-# nohup loadavg_put -redis=foo.bar.com &
+# nohup ./loadavg_put -redis=foo.bar.com &
 . Run parser component to get data from redis and produce HTML.
 [source,bash]
 # ./loadavg_get -redis=foo.bar.com 
