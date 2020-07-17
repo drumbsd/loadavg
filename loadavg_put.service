@@ -1,0 +1,15 @@
+[Unit]
+Description=LoadAvg
+After=network.target
+
+[Service]
+Type=simple
+User=velvet
+WorkingDirectory=/usr/local/bin/
+Environment="REDIS=foo.bar.com"
+ExecStart=/usr/local/bin/loadavg_put -redis=${REDIS}
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
