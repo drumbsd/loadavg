@@ -31,14 +31,11 @@ How it works?::
 [source,bash]
 # nohup ./loadavg_put -redis=foo.bar.com &
 
-or, still better:
+. or, still better:
 [source,bash]
 # cp loadavg_put.service /lib/systemd/system
-[source,bash]
 # systemctl daemon-reload
-[source,bash]
 # systemctl enable loadavg_put.service
-[source,bash]
 # systemctl start loadavg_put.service
 
 IMPORTANT: Don't forget to edit $REDIS variable inside loadavg_put.service before to start it.
