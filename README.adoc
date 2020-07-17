@@ -34,6 +34,7 @@ How it works?::
 . or, still better:
 [source,bash]
 # cp loadavg_put.service /lib/systemd/system
+# vim /lib/systemd/system/loadavg_put.service   # Edit the $REDIS variable.
 # systemctl daemon-reload
 # systemctl enable loadavg_put.service
 # systemctl start loadavg_put.service
