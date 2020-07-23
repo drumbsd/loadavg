@@ -3,11 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/go-redis/redis"
 	"os"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/go-redis/redis"
 )
 
 func main() {
@@ -27,6 +28,8 @@ func main() {
 		return
 	}
 
+	defer f.Close()
+
 	for k := 0; k < i; k++ {
 		future = future.Add(5 * time.Minute)
 		s = append(s, future)
@@ -42,6 +45,8 @@ func main() {
 		panic(err)
 	}
 
+	defer rdb.Close()
+
 	rdb2 := redis.NewClient(&redis.Options{
 		Addr:     *redisPtr + ":" + "6379", // use default Addr
 		Password: "",                       // no password set
@@ -51,6 +56,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	defer rdb2.Close()
 
 	vettore, err = rdb2.Keys("*").Result()
 	// Creazione prima riga tabella con la lista dei server
@@ -76,7 +83,7 @@ th, td { padding: 8px 16px; }
 	   `)
 
 	for _, v := range vettore {
-		v2 := strings.Split(v,".")
+		v2 := strings.Split(v, ".")
 		linea := fmt.Sprintln("<th class=tg-0pky>", v2[0], "</th>")
 		_, _ = f.WriteString(linea)
 	}
@@ -110,7 +117,4 @@ th, td { padding: 8px 16px; }
 	}
 	//fmt.Println("</tr></table>
 	_, _ = f.WriteString("</tr></tbody></table></div>")
-	rdb.Close()
-	rdb2.Close()
-	f.Close()
 }
